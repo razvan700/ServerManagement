@@ -3,9 +3,9 @@ package com.jetbrains.servermanager.enumeration;
 
 
 public enum Status {
-    STATUS_UP("SERVER_UP"),
+    SERVER_UP("SERVER_UP"),
 
-    STATUS_DOWN("SERVER_DOWN");
+    SERVER_DOWN("SERVER_DOWN");
 
     private final String status;
 
