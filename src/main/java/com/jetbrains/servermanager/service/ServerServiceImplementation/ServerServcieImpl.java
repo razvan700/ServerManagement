@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -16,6 +17,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -57,26 +60,39 @@ public class ServerServcieImpl implements ServerService {
 
     @Override
     public Collection<Server> list(int limit) {
-        List<Server> resultList = new ArrayList<>();
+        log.info("Fetching all servers {}");
+        List<Server> resultList;
+        resultList = serverRepository.findAll();
+        List<Server>finalRestultList = resultList.stream()
+                .limit(limit)
+                .collect(Collectors.toList());
+        return finalRestultList;
 
     }
 
     @Override
     public Server get(Long id) {
-        return null;
+        log.info("Fetching server with id {}", id);
+        return serverRepository.findById(id).get();
     }
     //changed
     @Override
     public Server update(Server server) {
-        return null;
+        log.info("Updating new server: {}", server.getName());
+        return serverRepository.save(server);
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        log.info("Deleting server with id: {}", id);
+        serverRepository.deleteById(id);
+        return true;
     }
 
     private String setServerImageUrl() {
-        return null;
+        String[] imageNames = {};
+        Random r=new Random();
+        // Store images in a path and retrieve them.. r is a random number, bound is set to 4 because you will use 4 images.
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/server/image" + imageNames[r.nextInt(4)]).toUriString();
     }
 }
