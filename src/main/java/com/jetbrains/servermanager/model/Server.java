@@ -3,10 +3,7 @@ package com.jetbrains.servermanager.model;
 import com.jetbrains.servermanager.enumeration.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.context.annotation.Primary;
 
 import static jakarta.persistence.GenerationType.AUTO;
@@ -30,4 +27,11 @@ public class Server {
     private String imageUrl;
     private Status status;
     private String brand;
+
+    public Status getStatus() {
+        return this.status;
+    }
+    public String getName() {
+        return this.name;
+    }
 }
