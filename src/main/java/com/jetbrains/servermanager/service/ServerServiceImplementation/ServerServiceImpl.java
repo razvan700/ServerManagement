@@ -32,13 +32,11 @@ public class ServerServiceImpl implements ServerService {
         server.setImageUrl(setServerImageUrl());
         return serverRepository.save(server);
     }
-    
-
 
     @Override
     public Server ping(String ipAddress) {
 
-        logger.info("Pinging server id " + ipAddress);
+        logger.info("Pinging server with id: " + ipAddress);
         Server server = serverRepository.findByIpAddress(ipAddress);
         InetAddress address = null;
         try {
@@ -67,7 +65,6 @@ public class ServerServiceImpl implements ServerService {
                 .limit(limit)
                 .collect(Collectors.toList());
         return finalResultList;
-
     }
 
     @Override
